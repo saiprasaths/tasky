@@ -66,3 +66,31 @@ const saveChanges = () => {
 
   localStorage.setItem("tasky", JSON.stringify({ cards: globalStore })); // an object
 };
+
+const deleteCard = (event) => {
+  event = window.event;
+  // id
+  const targetID = event.target.id;
+  const tagname = event.target.tagname;
+  // match the id of the element with the id inside the globleStore
+  // if match found remove
+
+  const newUpdatedArray = globalStore.filter(
+    (cardObject) => cardObject.id !== targetID
+  );
+
+  globalStore = newUpdatedArray;
+  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore })); // an object
+  // contact parent
+
+  if (tagname === "BUTTON") {
+    return taskContainer.removeChild(
+      event.target.parentNode.parentNode.parentNode
+    );
+  } else {
+    return taskContainer.removeChild(
+      event.target.parentNode.parentNode.parentNode.parentNode
+    );
+  }
+  // taskContainer.removeChild(Document.getElementById(targetID));
+};;
